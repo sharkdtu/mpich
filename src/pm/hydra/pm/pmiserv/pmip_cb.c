@@ -623,6 +623,9 @@ static HYD_status launch_procs(void)
             }
         }
 
+        exec->wdir = HYDU_getcwd();
+        HYDU_dump(stdout, "change the pwd to proxy's pwd %s\n", exec->wdir);
+
         if (exec->wdir && chdir(exec->wdir) < 0)
             HYDU_ERR_SETANDJUMP(status, HYD_INTERNAL_ERROR,
                                 "unable to change wdir to %s (%s)\n", exec->wdir,
